@@ -1,0 +1,65 @@
+﻿@model PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models.UserModel
+@{
+    ViewData["Title"] = "RegisterFarmer";
+}
+
+<style>
+    /* Center align the content */
+    .centered-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Set height for vertical centering */
+        background-image: url(/lib/imgs/RegisterBG.jpg); /* Replace 'your-background-image-url.jpg' with your image URL */
+        background-size: cover;
+        background-position: center;
+    }
+
+    .card-container {
+        width: 60%; /* Set a larger width for the card container */
+        max-width: 500px; /* Set a maximum width */
+        padding: 40px; /* Increase padding to maintain spacing */
+    }
+
+    /* Style for form inputs */
+    .form-group {
+        margin-bottom: 20px; /* Add margin between form elements */
+    }
+</style>
+
+@using (Html.BeginForm("RegisterFarmer", "SignIn", FormMethod.Post))
+{
+    <div class="centered-content">
+        @if (TempData == TempData["ErrorUsernameTaken"])
+        {
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>Oh snap!</strong> <a href="#" class="alert-link">That username is taken.</a> Try another.
+            </div>
+        }
+        <div class="card-container card text-white bg-primary">
+            <h1>Register</h1>
+
+            <div>
+                <div class="form-group">
+                    @Html.Label("Farmer Name")
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", id = "InputName" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Farmer Username")
+                    @Html.TextBoxFor(model => model.Username, new { @class = "form-control", id = "InputUsername" })
+                </div>
+                <div class="form-group">
+                    @Html.Label("Farmer Email")
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", id = "InputEmail" })
+                </div>
+                <div class="form-group">
+                    @Html.Label(" Farmer Password")
+                    @Html.PasswordFor(model => model.PasswordHash, new { @class = "form-control", id = "InputPassword", type = "password" })
+                </div>
+                <button type="submit" class="btn btn-success">Register</button>
+            </div>
+
+        </div>
+    </div>
+}

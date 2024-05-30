@@ -1,0 +1,143 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models.PostModel>
+<style>
+    .btn.btn-success {
+        width: 100%; /* Make the button fill the container width */
+        height: 100%;
+        border: none; /* Remove button border */
+        padding: 10px; /* Adjust padding as needed */
+        margin-top: 5px; /* Provide margin from the top */
+        margin-bottom:5px;
+        align-self: center;
+        background-color: #4CAF50; /* Green background */
+    }
+
+
+</style>
+<head>
+    <title>Home Page </title>
+</head>
+<html>
+<body>
+        <h1> Sustainable Farming Hub: </h1>
+        
+    <div class="centered-content">
+        <div class="container">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter Topics</a>
+            <div class="dropdown-menu" style="">
+                <h6 class="dropdown-header">Filter</h6>
+                <a class="dropdown-item" href="#">Organic farming techniques</a>
+                <a class="dropdown-item" href="#">Water Conservation Methods</a>
+                <a class="dropdown-item" href="#">Soil Health & Maintainence</a>
+
+            </div>
+            <!-- Button to add post -->
+            <a type="button" class="btn btn-success" style="background-size:cover" asp-controller="Home" asp-action="AddPost">+ New Post</a>
+                @if (Model == null)
+                {
+                        <div class="card text-black border-primary mb-3" style="max-width: 80rem;">
+                    <div class="card-header">
+                        <h3>posted by: Michael Turner</h3>
+                        <p class="card-text">Date Posted: 01/12/2024</p>
+                                <img class="card-img-top" src="~/lib/imgs/HomePgFarm.jpg" />
+                                <div class="card-body">
+                                    <p class="card-text">Topic: Organic farming techniques</p>
+                                    <p class="card-text"></p>
+                                    <p class="card-text">Want to try switching to an organic substarte for strawberries. Any recommendations?</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success">Comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                <div class="card text-black border-primary mb-3" style="max-width: 80rem;">
+                    <div class="card-header">
+                        <h3>posted by: Donny_the_dealer</h3>
+                        <p class="card-text">Date Posted: 01/12/2024</p>
+                        <img class="card-img-top" src="~/lib/imgs/HomePgFarm.jpg" />
+                        <div class="card-body">
+                            <p class="card-text">Topic: Soil Health & Maintainence</p>
+                            <p class="card-text"></p>
+                            <p class="card-text">Medicinal Cannibis is the fastest growing Medicinal crop and here's what you need to know'</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success">Comment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card text-black border-primary mb-3" style="max-width: 80rem;">
+                    <div class="card-header">
+                        <h3>posted by: Michael Turner</h3>
+                        <p class="card-text">Date Posted: 01/12/2024</p>
+                        <img class="card-img-top" src="~/lib/imgs/HomePgFarm.jpg" />
+                        <div class="card-body">
+                            <p class="card-text">Topic: Organic farming techniques</p>
+                            <p class="card-text"></p>
+                            <p class="card-text">Want to try switching to an organic substarte for strawberries. Any recommendations?</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success">Comment</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+                else
+                    //Will load in all modules from a list as items
+                    @foreach (var item in Model)
+                    {
+                    <div class="card text-black border-primary mb-3" style="max-width: 80rem;">
+                        <div class="card-header">
+                            <h3>posted by: @item.Creator</h3>
+                            <p class="card-text">Date Posted: @item.PostDate.ToString()</p>
+                                <img class="card-img-top" src="data:image;base64,@(Convert.ToBase64String(@item.PostImage))" style="height: 800px; object-fit:contain;" />
+                            <div class="card-body">
+                                <p class="card-text">Topic: @item.Topic</p>
+                                <p class="card-text">@item.Content</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-success">Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+        </div>
+    </div>
+    <div>
+        <ul class="pagination pagination-lg">
+            <li class="page-item disabled">
+                <a class="page-link" href="#">&laquo;</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">4</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">5</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+
+
+</body>
+</html>

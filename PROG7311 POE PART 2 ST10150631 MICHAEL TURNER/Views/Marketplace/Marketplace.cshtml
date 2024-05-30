@@ -1,0 +1,149 @@
+﻿@model IEnumerable<PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models.ProductModel>
+    <style>
+        .btn.btn-success {
+            width: 100%; /* Make the button fill the container width */
+            height: 100%;
+            border: none; /* Remove button border */
+            margin-bottom: 5px;
+        }
+
+        .album {
+            padding-top: 100px; /* Increase the top padding */
+            padding-bottom: 100px; /* Increase the bottom padding */
+            padding-left: 50px;
+            padding-right: 50px;
+            background-size: cover;
+
+
+        }
+    </style>
+    <head>
+        <title>Green Energy Marketplace: </title>
+
+    </head>
+    <html>
+    <body>
+        <h1>Products: </h1>
+        <div class="album py-5 bg-primary" style="background-size:cover">
+            <div class="container">
+                <!-- Button to Add Product-->
+                @if(CoreModel.UserRole == 2)
+                {
+                    <a type="button" class="btn btn-success" style="background-size:cover" asp-controller="Product" asp-action="AddProductView">+ Add Product</a>
+                }
+                
+                <div class="row">
+
+                    @if (Model == null)
+                    {
+                        <div class="col-md-4">
+                            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+                                <div class="card-header">
+                                    <h3>Product Name: Tesla Solar Panel</h3>
+                                    <p>Supplier: Farmer Mike</p>
+                                    <img class="card-img-top" src="~/lib/imgs/https___cdn.cnn.com_cnnnext_dam_assets_190501091645-tesla-solar-file.jpg" />
+                                    <div class="card-body">
+                                        <p class="card-text">Price: R7000 per unit</p>
+                                        <p class="card-text">Category: Solar Panels</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-danger">View</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+                                <div class="card-header">
+                                    <h3>Product Name: E420D Wind Turbine</h3>
+                                    <p>Supplier: Farmer Mike</p>
+                                    <img class="card-img-top" src="~/lib/imgs/WindTurbineSample.jpg" />
+                                    <div class="card-body">
+                                        <p class="card-text">Price: R20 000 per unit</p>
+                                        <p class="card-text">Category: Wind Turbines</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-danger">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+                                <div class="card-header">
+                                    <h3>Product Name: Tesla Solar Panel</h3>
+                                    <p>Supplier: Farmer Mike</p>
+                                    <img class="card-img-top" src="~/lib/imgs/https___cdn.cnn.com_cnnnext_dam_assets_190501091645-tesla-solar-file.jpg" />
+                                    <div class="card-body">
+                                        <p class="card-text">Price: R7000 per unit</p>
+                                        <p class="card-text">Category: Solar Panels</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-danger">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                        //Will load either farmer products or all products
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-4">
+                                <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
+                                    <div class="card-header">
+                                        <h3>@item.ProductName</h3>
+                                        <h4>Supplier @item.SupplierName</h4>
+                                    <img class="card-img-top" src=" data:image;base64,@(Convert.ToBase64String(@item.ProductImage)) "  />
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">Procuction Date: @item.ProductionDate.ToShortDateString()</p>
+                                        <p class="card-text">Farmer: @item.SupplierName</p>
+                                        <p class="card-text">Category: @item.ProductCategory</p>
+                                        <p class="card-text">Price: R @item.ProductPrice</p>
+                                        <p class="card-text">Description: @item.ProductDescription</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <!-- Deletes the semester when pressed -->
+                                            <div class="btn-group">
+                                                @if(CoreModel.UserRole == 2)
+                                                {
+                                                    <form action="Delete" method="post">
+                                                        <input type="hidden" name="ProductName" value="@item.ProductName" />
+                                                        <input type="submit" value="view" class="btn btn-info float-right mt-3" />
+                                                    </form>
+                                                }
+                                                else
+                                                {
+                                                    <form action="Delete" method="post">
+                                                        <input type="hidden" name="SemName" value="@item.ProductName" />
+                                                        <input type="submit" value="Delete" class="btn btn-danger float-right mt-3" />
+                                                    </form>
+                                                }
+                                            
+                                                @if (TempData["ErrorMessage"] != null)
+                                                {
+                                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                        @TempData["ErrorMessage"]
+                                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+    </html>
+
