@@ -9,12 +9,17 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         private MarketplaceModel model = new MarketplaceModel();
         private ProductModel procuctModel = new ProductModel();
         // GET: MarketplaceController
+        /// <summary>
+        /// Will return the marketplace view based on the user role
+        /// </summary>
+        /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
         public async Task<ActionResult> Marketplace()
         {
             if (CoreModel.UserRole == 1)
             {
                 if(CoreModel.SignedInUser == null){return View();}
-                List<ProductModel> productList = await model.GetAllProducts();
+                List<ProductModel> productList = model.GetAllProducts().Result;
                 if(productList == null) {return View();}
                 return View(productList);
             }
@@ -30,53 +35,65 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
                 return View();
             }
         }
+        //======================================================= End of Method ===================================================
 
-        // GET: MarketplaceController/Details/5
-        public ActionResult Details(int id)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
+        [HttpGet]
+        public ActionResult AddProduct()
         {
-            return View();
+            var Product = new ProductModel();
+            return View(Product);
         }
+        //======================================================= End of Method ===================================================
 
-        // GET: MarketplaceController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: MarketplaceController/Create
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> AddProduct(ProductModel product, IFormFile file)
         {
-            try
+            if (file != null)
             {
-                return RedirectToAction(nameof(Index));
+                using (var memoryStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(memoryStream);
+                    product.ProductImage = memoryStream.ToArray();
+                }
             }
-            catch
-            {
-                return View();
-            }
+            await model.AddProductDB(product.ProductName, product.ProductDescription, product.ProductCategory, product.ProductionDate, product.ProductImage, product.ProductPrice, CoreModel.SignedInUser);
+            return RedirectToAction("Marketplace");
         }
+        //======================================================= End of Method ===================================================
 
-        // GET: MarketplaceController/Delete/5
-        public ActionResult Delete(int id)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
+        public ActionResult DeleteProduct(int id)
         {
+            model.RemoveProduct(id);
             return View();
         }
 
-        // POST: MarketplaceController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        //======================================================= End of Method ===================================================
+        [HttpGet]
+        public ActionResult OnFilterType(string type)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            List<ProductModel> productList = model.FilterByType(type).Result;
+            return View("Marketplace",productList);
         }
+
+
     }
 }

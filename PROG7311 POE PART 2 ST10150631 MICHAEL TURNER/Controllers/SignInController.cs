@@ -83,9 +83,9 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         public async Task <IActionResult> RegisterEmployee(UserModel user)
         {
             bool anyFieldBlank = string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Name) || string.IsNullOrWhiteSpace(user.Email) || string.IsNullOrEmpty(user.PasswordHash);
-            if (signIn.GetUserDetails(user.Username)==null)
+            if (signIn.GetUserDetails(user.Username).Result==null)
             {
-                await signIn.AddEmployee(user.Username, user.Name, user.Email, user.PasswordHash);
+                await signIn.AddEmployee(user.Username, user.PasswordHash, user.Name, user.Email);
                 CoreModel.SignedInUser = user.Username;
                 return RedirectToAction("Index", "Home");
             }
@@ -109,16 +109,16 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         public async Task<IActionResult> RegisterFarmer(UserModel user)
         {
             bool anyFieldBlank = string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Name) || string.IsNullOrWhiteSpace(user.Email) ;
-            
-                await signIn.AddEmployee(user.Username, user.Name, user.Email, user.PasswordHash);
+            if (signIn.GetUserDetails(user.Username) != null || anyFieldBlank == false)
+            {
+                await signIn.AddFarmer(user.Username, user.PasswordHash, user.Name, user.Email);
                 return RedirectToAction("Index", "Home");
-            /*
+            }
             else
             {
                 TempData["ErrorUsernameTaken"] = "Sorry, that username has already been taken or required fields are blank. Try again.";
                 return View("Register");
             }
-            */
         }
         //======================================================= End of Method ===================================================
         
@@ -132,11 +132,9 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         public async Task<IActionResult> LoginUser(UserModel user)
         {
             bool isFieldBlank = string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrEmpty(user.PasswordHash);
-            UserModel currentUser = signIn.Login(user.Username, user.PasswordHash);
-            if (currentUser != null && isFieldBlank == false)
+            if (signIn.Login(user.Username, user.PasswordHash) != null && isFieldBlank == false)
             {
-                CoreModel.SignedInUser = currentUser.Username;
-                CoreModel.UserRole = currentUser.Role;
+                var userLogin = signIn.Login(user.Username, user.PasswordHash);
                 return RedirectToAction("Index", "Home");
             }
             else

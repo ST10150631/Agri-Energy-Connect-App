@@ -150,12 +150,11 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
         /// ----------------------------------------------------- Start of Method ------------------------------------------------
         public async Task<bool> AddFarmer(string username, string password, string name, string email)
         {
-            if (await GetUserDetails(username) == null)
-            {
+            
                 var PasswordHash = Hashing.HashPassword(password);
-                string query = "INSERT INTO [dbo].[User] (Username, Name, Email, PasswordHash, Role_ID) VALUES (@Username, @Name, @Email, @PasswordHash, 2)";
-                try
-                {
+                string query = "INSERT INTO [dbo].[Users] (Username, Name, Email, PasswordHash, Role_ID) VALUES (@Username, @Name, @Email, @PasswordHash, 2)";
+            try 
+            { 
                     using (SqlConnection connection = new SqlConnection(ConnectionString))
                     {
                         SqlCommand command = new SqlCommand(query, connection);
@@ -163,12 +162,11 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                         command.Parameters.AddWithValue("@Name", name);
                         command.Parameters.AddWithValue("@Email", email);
                         command.Parameters.AddWithValue("@PasswordHash", PasswordHash);
+                        command.Parameters.AddWithValue("@Role_ID", 2);
 
-                        connection.Open();
+                    connection.Open();
                         await command.ExecuteNonQueryAsync();
                     }
-                    CoreModel.SignedInUser = username;
-                    CoreModel.UserRole = 2;
                     return true;
                 }
                 catch (Exception e)
@@ -176,8 +174,6 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                     Console.WriteLine("Failure to add user");
                     return false;
                 }
-            }
-            return false;
         }
         //======================================================= End of Method ===================================================
 
@@ -193,6 +189,8 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
             var user = GetUserDetails(username).Result;
             if (user.Username == username && VerifyPassword(password,user.PasswordHash))
             {
+                CoreModel.SignedInUser = username;
+                CoreModel.UserRole = user.Role;
                 return user;
             }
             return null;

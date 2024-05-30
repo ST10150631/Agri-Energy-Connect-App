@@ -23,9 +23,11 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
         /// Method to add a product to the database
         /// </summary>
         /// ----------------------------------------------------- Start of Method ------------------------------------------------
-        public async Task AddProductDB(string Name, string Description, string Category, DateOnly ProductionDate, byte[] ProductImage, Decimal Price, string SupplierName)
+        public async Task AddProductDB(string Name, string Description, string Category, DateTime ProductionDate, byte[] ProductImage, Decimal Price, string SupplierName)
         {
             string query = "INSERT INTO [dbo].[PRODUCTS] ( Name, Description, Category, ProductionDate,ProductImage, Price, SupplierName) VALUES (@Name, @Description, @Category, @ProductionDate, @ProductImage, @Price, @SupplierName)";
+            //Ensures that Price is a decimal with 2 decimal places
+            Price = Decimal.Round(Price, 2);
             try
             {
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -51,18 +53,18 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
         //======================================================= End of Method ===================================================
 
         /// <summary>
-        ///  Deletes a product from the database
+        ///  Deletes a product from the database based off the ID
         /// </summary>
         /// ----------------------------------------------------- Start of Method ------------------------------------------------
-        public async Task <bool> RemoveProduct(string Name)
+        public async Task <bool> RemoveProduct(int ID)
         {
-            string Query = "DELETE FROM [dbo].[PRODUCTS] WHERE Name = @Name";
+            string Query = "DELETE FROM [dbo].[PRODUCTS] WHERE Product_ID = @ID";
             try
             {
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
                     SqlCommand command = new SqlCommand(Query, connection);
-                    command.Parameters.AddWithValue("@Name", Name);
+                    command.Parameters.AddWithValue("@ID", ID);
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
@@ -97,7 +99,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                         product.ProductName = reader["Name"].ToString();
                         product.ProductDescription = reader["Description"].ToString();
                         product.ProductCategory = reader["Category"].ToString();
-                        product.ProductionDate = (DateOnly)reader["ProductionDate"];
+                        product.ProductionDate = (DateTime)reader["ProductionDate"];
                         product.ProductImage = (byte[])reader["ProductImage"];
                         product.ProductPrice = (Decimal)reader["Price"];
                         product.SupplierName = reader["SupplierName"].ToString();
@@ -106,12 +108,11 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                 }
                 return products;
             }
-            catch (Exception e)
+            catch
             {
                 Console.WriteLine("Failure to retrieve products");
                 return null;
             }
-            
         }
         //======================================================= End of Method ===================================================
 
@@ -138,7 +139,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                         product.ProductName = reader["Name"].ToString();
                         product.ProductDescription = reader["Description"].ToString();
                         product.ProductCategory = reader["Category"].ToString();
-                        product.ProductionDate = (DateOnly)reader["ProductionDate"];
+                        product.ProductionDate = (DateTime)reader["ProductionDate"];
                         product.ProductImage = (byte[])reader["ProductImage"];
                         product.ProductPrice = (Decimal)reader["Price"];
                         product.SupplierName = reader["SupplierName"].ToString();
@@ -156,6 +157,47 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
         }
         //======================================================= End of Method ===================================================
 
+        /// <summary>
+        /// Asynchronously retrieves a list of products based on the category
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
+        public async Task<List<ProductModel>> FilterByType(string type)
+        {
+            List<ProductModel> products = new List<ProductModel>();
+            string Query = "SELECT * FROM [dbo].[PRODUCTS] WHERE Category = @Category";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    SqlCommand command = new SqlCommand(Query, connection);
+                    command.Parameters.AddWithValue("@Category", type);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ProductModel product = new ProductModel();
+                        product.ProductName = reader["Name"].ToString();
+                        product.ProductDescription = reader["Description"].ToString();
+                        product.ProductCategory = reader["Category"].ToString();
+                        product.ProductionDate = (DateTime)reader["ProductionDate"];
+                        product.ProductImage = (byte[])reader["ProductImage"];
+                        product.ProductPrice = (Decimal)reader["Price"];
+                        product.SupplierName = reader["SupplierName"].ToString();
+                        products.Add(product);
+                    }
+                }
+                return products;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failure to retrieve products");
+                return null;
+            }
+            
+        }
+        //======================================================= End of Method ===================================================
 
     }
 }

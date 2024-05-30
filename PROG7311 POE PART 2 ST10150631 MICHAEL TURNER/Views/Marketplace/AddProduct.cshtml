@@ -5,7 +5,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh; /* Set height for vertical centering */
+        height: 120vh; /* Set height for vertical centering */
         background-image: url(/lib/imgs/SunsetFarmBG.jpg); /* Replace 'your-background-image-url.jpg' with your image URL */
         background-size: cover;
         background-position: center;
@@ -22,15 +22,31 @@
         margin-bottom: 20px; /* Add margin between form elements */
     }
 </style>
-<h1> Create New Post: </h1>
-@using (Html.BeginForm("CreatePostClicked", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<h1> Create New Product: </h1>
+@using (Html.BeginForm("AddProduct", "Marketplace", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="centered-content">
         <div class="card-container card text-white bg-primary">
             <h1>Create New Product</h1>
+            <!-- Name -->
+            <div class="form-group">
+                @Html.Label("Product Name:")
+                @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control", id = "InputPorductName" })
+            </div>
+            <!-- Price -->
+            <div class="form-group">
+                @Html.Label("Product Price:")
+                @Html.TextBoxFor(model => model.ProductPrice, new { @class = "form-control", id = "InputProductPrice", type = "number", pattern = "[0-9]*" })
+            </div>
+            <!-- Production Date -->
+            <div class="form-group">
+                @Html.Label("Production Date:")
+                @Html.TextBoxFor(model => model.ProductionDate, new { @class = "form-control", id = "InputProductionDate", type = "date" })
+            </div>
+            <!-- Category -->
             <div class="form-group">
                 @Html.Label("Select a category for this product: ")
-                <select class="form-select" id="Topic" name="Topic" fdprocessedid="us1jy">
+                <select class="form-select" id="ProductCategory" name="ProductCategory" fdprocessedid="us1jy">
                     <option value="Wind Energy">Wind Energy</option>
                     <option value="Solar Energy">Solar Energy</option>
                     <option value="Hydropower">Hydropower</option>
@@ -40,10 +56,10 @@
             </div>
             <div class="form-group">
                 @Html.Label("Upload an Image: ")
-                <input type="file" name="PostImage" id="PostImage">
+                <input type="file" name="file" id="file">
             </div>
             <div class="form-group">
-                @Html.Label("Model Description:")
+                @Html.Label("Product Description:")
                 @Html.TextBoxFor(model => model.ProductDescription, new { @class = "form-control", id = "InputPorductDescription" })
             </div>
 
