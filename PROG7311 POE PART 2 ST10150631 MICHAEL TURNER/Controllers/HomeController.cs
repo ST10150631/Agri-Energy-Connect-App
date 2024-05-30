@@ -35,22 +35,26 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         [HttpGet]
         public IActionResult OnFilter()
         {
+            string Topic;
             var Post = new PostModel();
             return View(Post);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="post"></param>
+        /// <param name="topic"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult OnFilter(PostModel post,string topic)
+        public IActionResult OnFilter(PostModel post,string Topic)
         {
-            List<PostModel> posts = homeModel.GetPosts().Result;
-            List<PostModel> filteredPosts = new List<PostModel>();
-            foreach (var item in posts)
+            if(Topic.Equals("All"))
             {
-                if (item.Topic == post.Topic)
-                {
-                    filteredPosts.Add(item);
-                }
+                List<PostModel> posts = homeModel.GetPosts().Result;
+                return RedirectToAction("Index", posts);
             }
+            List<PostModel> filteredPosts = homeModel.GetFilteredPosts(Topic).Result;
             return View("Index", filteredPosts);
         }
 

@@ -56,6 +56,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                     }
                 }
             }
+            posts = posts.OrderByDescending(p => p.PostDate).ToList();
             return posts;
         }
         /// <summary>
@@ -120,7 +121,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[POSTS] WHERE PostTopic = @Topic", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM [dbo].[POSTS] WHERE PostTopic = @Topic ORDER BY DatePosted DESC", conn))
                 {
                     cmd.Parameters.AddWithValue("@Topic", topic);
                     using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
@@ -139,6 +140,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                     }
                 }
             }
+            posts = posts.OrderByDescending(p => p.PostDate).ToList();
             return posts;
         }
 

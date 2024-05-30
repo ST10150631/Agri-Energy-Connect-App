@@ -108,20 +108,17 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterFarmer(UserModel user)
         {
-            bool anyFieldBlank = string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Name) || string.IsNullOrWhiteSpace(user.Email) || string.IsNullOrEmpty(user.PasswordHash);
-            if (signIn.GetUserDetails(user.Username) == null && anyFieldBlank == false)
-            {
+            bool anyFieldBlank = string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Name) || string.IsNullOrWhiteSpace(user.Email) ;
+            
                 await signIn.AddEmployee(user.Username, user.Name, user.Email, user.PasswordHash);
-                CoreModel.SignedInUser = user.Username;
-                CoreModel.UserRole = 2;
                 return RedirectToAction("Index", "Home");
-            }
+            /*
             else
             {
                 TempData["ErrorUsernameTaken"] = "Sorry, that username has already been taken or required fields are blank. Try again.";
                 return View("Register");
             }
-
+            */
         }
         //======================================================= End of Method ===================================================
         

@@ -3,6 +3,6 @@
     public static class CoreModel
     {
         public static string SignedInUser = string.Empty;
-        public static int UserRole;
+        public static int UserRole = 0;
     }
 }

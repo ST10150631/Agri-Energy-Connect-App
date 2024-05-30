@@ -1,4 +1,4 @@
-﻿@model PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models.PostModel
+﻿@model PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models.ProductModel
 <style>
     /* Center align the content */
     .centered-content {
@@ -23,29 +23,30 @@
     }
 </style>
 <h1> Create New Post: </h1>
-@using (Html.BeginForm("CreatePostClicked", "Home", FormMethod.Post ,new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CreatePostClicked", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="centered-content">
         <div class="card-container card text-white bg-primary">
-            <h1>Create New Post</h1>
+            <h1>Create New Product</h1>
             <div class="form-group">
-                @Html.Label("Select a Topic for this post: ")
+                @Html.Label("Select a category for this product: ")
                 <select class="form-select" id="Topic" name="Topic" fdprocessedid="us1jy">
-                    <option value="Organic farming techniques">Organic farming techniques</option>
-                    <option value="Water Conservation Methods">Water Conservation Methods</option>
-                    <option value="Soil Health & Maintainence">Soil Health & Maintainence</option>
+                    <option value="Wind Energy">Wind Energy</option>
+                    <option value="Solar Energy">Solar Energy</option>
+                    <option value="Hydropower">Hydropower</option>
+                    <option value="Biofuel">Biofuel</option>
                     <option value="Other">Other</option>
                 </select>
             </div>
             <div class="form-group">
                 @Html.Label("Upload an Image: ")
-                <input  type="file" name="PostImage" id="PostImage">
+                <input type="file" name="PostImage" id="PostImage">
             </div>
             <div class="form-group">
-                @Html.Label("Post Content:")
-                @Html.TextBoxFor(model => model.Content, new { @class = "form-control", id = "InputModuleName" })
+                @Html.Label("Model Description:")
+                @Html.TextBoxFor(model => model.ProductDescription, new { @class = "form-control", id = "InputPorductDescription" })
             </div>
-            
+
             <button type="submit" class="btn btn-success">+ Create post</button>
         </div>
 
