@@ -21,14 +21,15 @@
 </head>
 <html>
 <body>
-        <h1> Sustainable Farming Hub: </h1>
+        <h1 style="color:aliceblue"> Sustainable Farming Hub: </h1>
         
     <div class="centered-content">
         <div class="container">
             <!-- Filter Mechanism -->
             @using (Html.BeginForm("OnFilter", "Home", FormMethod.Post))
             {
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter Topics</a>
+                <div class="row-cols-2">
+                <a class="form-select" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter Topics</a>
                 <div class="dropdown-menu" style="">
                     <h6 class="dropdown-header">Filter</h6>
                     <select class="dropdown-item" id="Topic" name="Topic" fdprocessedid="us1jy">
@@ -39,68 +40,14 @@
                     </select>
                     <button type="submit" class="btn btn-primary">Apply Filter</button>
                 </div>
+                </div>
             }
             <!-- Button to add post -->
             @if(CoreModel.UserRole != 0)
             {
                 <a type="button" class="btn btn-success" style="background-size:cover" asp-controller="Home" asp-action="AddPost">+ New Post</a>
             }
-                @if (Model == null)
-                {
-                        <div class="card text-black border-primary mb-3" style="max-width: 80rem;">
-                    <div class="card-header">
-                        <h3>posted by: Michael Turner</h3>
-                        <p class="card-text">Date Posted: 01/12/2024</p>
-                                <img class="card-img-top" src="~/lib/imgs/HomePgFarm.jpg" />
-                                <div class="card-body">
-                                    <p class="card-text">Topic: Organic farming techniques</p>
-                                    <p class="card-text"></p>
-                                    <p class="card-text">Want to try switching to an organic substarte for strawberries. Any recommendations?</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-success">Comment</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                <div class="card text-black border-primary mb-3" style="max-width: 80rem;">
-                    <div class="card-header">
-                        <h3>posted by: Donny_the_dealer</h3>
-                        <p class="card-text">Date Posted: 01/12/2024</p>
-                        <img class="card-img-top" src="~/lib/imgs/HomePgFarm.jpg" />
-                        <div class="card-body">
-                            <p class="card-text">Topic: Soil Health & Maintainence</p>
-                            <p class="card-text"></p>
-                            <p class="card-text">Medicinal Cannibis is the fastest growing Medicinal crop and here's what you need to know'</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-success">Comment</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card text-black border-primary mb-3" style="max-width: 80rem;">
-                    <div class="card-header">
-                        <h3>posted by: Michael Turner</h3>
-                        <p class="card-text">Date Posted: 01/12/2024</p>
-                        <img class="card-img-top" src="~/lib/imgs/HomePgFarm.jpg" />
-                        <div class="card-body">
-                            <p class="card-text">Topic: Organic farming techniques</p>
-                            <p class="card-text"></p>
-                            <p class="card-text">Want to try switching to an organic substarte for strawberries. Any recommendations?</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-success">Comment</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                }
-                else
-                    //Will load in all modules from a list as items
+            <!-- Display Posts -->
                     @foreach (var item in Model)
                     {
                     <div class="card text-black border-primary mb-3" style="max-width: 80rem;">
@@ -109,8 +56,7 @@
                             <p class="card-text">Date Posted: @item.PostDate.ToString()</p>
                             @if(item.PostImage != null)
                             {
-                                <img class="card-img-top" src="data:image;base64,@(Convert.ToBase64String(@item.PostImage))" style="height: 800px; object-fit:contain;" />
-
+                                <img class="card-img-top" src="data:image;base64,@(Convert.ToBase64String(@item.PostImage))" style="height: 600px; object-fit:cover;" />
                             }
                             <div class="card-body">
                                 <p class="card-text">Topic: @item.Topic</p>

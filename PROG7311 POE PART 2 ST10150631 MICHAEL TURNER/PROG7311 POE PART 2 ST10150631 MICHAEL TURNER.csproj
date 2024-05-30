@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Views\Education\" />
-    <Folder Include="Views\Collaboration\" />
   </ItemGroup>
 
   <ItemGroup>

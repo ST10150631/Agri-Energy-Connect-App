@@ -36,6 +36,17 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         /// </summary>
         /// <returns></returns>
         /// ----------------------------------------------------- Start of Method ------------------------------------------------
+        public IActionResult SignInPrompt()
+        {
+            return View();
+        }
+        //======================================================= End of Method ===================================================
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
         [HttpGet]
         public IActionResult LoginUser()
         {

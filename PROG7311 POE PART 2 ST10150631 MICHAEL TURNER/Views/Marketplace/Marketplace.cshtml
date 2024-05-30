@@ -23,42 +23,49 @@
     </head>
     <html>
     <body>
-        <h1>Products: </h1>
+    <h1 style="color:aliceblue">Products: </h1>
     @if (CoreModel.UserRole == 1)
     {
-        <!-- Filter Mechanism -->
-        @using (Html.BeginForm("OnFilterType", "Marketplace", FormMethod.Post))
-        {
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter Product Types</a>
-            <div class="dropdown-menu" style="">
-                <h6 class="dropdown-header">Filter</h6>
-                <select class="dropdown-item" id="type" name="type" fdprocessedid="us1jy">
-                    <option value="All">All</option>
-                    <option value="Wind Energy">Wind Energy</option>
-                    <option value="Solar Energy">Solar Energy</option>
-                    <option value="Hydropower">Hydropower</option>
-                    <option value="Biofuel">Biofuel</option>
-                    <option value="Other">Other</option>
-                </select>
-                <button type="submit" class="btn btn-primary">Apply Filter</button>
-            </div>
-        }
-        @using (Html.BeginForm("OnFilterDate", "Marketplace", FormMethod.Post))
-        {
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter Product Dates</a>
-            <div class="dropdown-menu" style="">
-                <h6 class="dropdown-header">Filter</h6>
-                <div class="form-group">
-                    <label for="startDate">Start Date:</label>
-                    <input type="date" class="form-control" id="startDate" name="startDate" required>
+        <div class="row">
+            <!-- Filter Mechanism for product Type -->
+        <div class="col">
+            @using (Html.BeginForm("OnFilterType", "Marketplace", FormMethod.Post))
+            {
+                <a class="form-select" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter Product Types</a>
+                <div class="dropdown-menu" style="">
+                    <h6 class="dropdown-header">Filter</h6>
+                    <select class="dropdown-item" id="type" name="type" fdprocessedid="us1jy">
+                        <option value="All">All</option>
+                        <option value="Wind Energy">Wind Energy</option>
+                        <option value="Solar Energy">Solar Energy</option>
+                        <option value="Hydropower">Hydropower</option>
+                        <option value="Biofuel">Biofuel</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Apply Filter</button>
                 </div>
-                <div class="form-group">
-                    <label for="endDate">End Date:</label>
-                    <input type="date" class="form-control" id="endDate" name="endDate" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Apply Filter</button>
+            }
             </div>
-        }
+            <!-- Filter Mechanism for product Production Date -->
+        <div class="col">
+            @using (Html.BeginForm("OnFilterDate", "Marketplace", FormMethod.Post))
+            {
+                <a class="form-select" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter Product Dates</a>
+                <div class="dropdown-menu" style="">
+                    <h6 class="dropdown-header">Filter</h6>
+                    <div class="form-group">
+                        <label for="startDate">Start Date:</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date:</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Apply Filter</button>
+                </div>
+            }
+        </div>
+        </div>
     }
         <div class="album py-5 bg-primary" style="background-size:cover">
             <div class="container">

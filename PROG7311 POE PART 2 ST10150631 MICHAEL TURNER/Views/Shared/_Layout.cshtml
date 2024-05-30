@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body style="background-color:#141414">
     <header>
         <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
@@ -36,7 +36,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="" asp-action="">Green Marketplace</a>
+                                <a class="nav-link" asp-area="" asp-controller="SignIn" asp-action="SignInPrompt">Green Marketplace</a>
                             </li>
                         }
                         else
@@ -51,6 +51,12 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Marketplace" asp-action="Marketplace">Green Marketplace</a>
                         </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="EducationHub" asp-action="Hub">Education Hub</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Collaboration" asp-action="Collabs">Collaborations</a>
+                            </li>
                         }
                         
                         @if (CoreModel.UserRole == 1)
@@ -75,6 +81,7 @@
             </div>
         </nav>
     </header>
+    
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

@@ -4,12 +4,11 @@
 }
 
 <style>
-    /* Center align the content */
     .centered-content {
         display: flex;
         justify-content: center;
         align-items: center;
-        height:100vh;
+        height: 100vh;
         width: 180vh; /* Set height for vertical centering */
         background-image: url(/lib/imgs/pexels-pixabay-259280.jpg); /* Replace 'your-background-image-url.jpg' with your image URL */
         background-size: 100%,100%;
@@ -41,7 +40,7 @@
                     @Html.PasswordFor(model => model.PasswordHash, new { @class = "form-control", id = "InputPassword", type = "password" })
 
                 </div>
-                <button type="submit" class="btn btn-success">Register</button>
+                <button type="submit" class="btn btn-success">Sign In</button>
             </div>
 
         </div>

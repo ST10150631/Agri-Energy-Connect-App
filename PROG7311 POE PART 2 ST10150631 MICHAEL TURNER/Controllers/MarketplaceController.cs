@@ -80,10 +80,11 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// ----------------------------------------------------- Start of Method ------------------------------------------------
-        public ActionResult DeleteProduct(int id)
+        public async Task< ActionResult> DeleteProduct(int productId)
         {
-            model.RemoveProduct(id);
-            return View();
+            await model.RemoveProduct(productId);
+            var productList = model.GetFarmerProducts().Result;
+            return View("Marketplace", productList);
         }
 
         //======================================================= End of Method ===================================================

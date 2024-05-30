@@ -121,7 +121,7 @@
     <value />
   </data>
   <data name="ConnectString" xml:space="preserve">
-    <value>Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_PART2_DB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication="Active Directory Default";</value>
+    <value>"Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_DB;Persist Security Info=False;User ID=st10150631;Password=Br1s1ngr1047;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";</value>
   </data>
   <data name="OfflineConnectString" xml:space="preserve">
     <value>Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_PART2_DB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication="Active Directory Default";</value>

@@ -59,9 +59,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
         public async Task <bool> RemoveProduct(int ID)
         {
             string Query = "DELETE FROM [dbo].[PRODUCTS] WHERE Product_ID = @ID";
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(ConnectionString))
+              using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
                     SqlCommand command = new SqlCommand(Query, connection);
                     command.Parameters.AddWithValue("@ID", ID);
@@ -69,12 +67,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                     command.ExecuteNonQuery();
                 }
                 return true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Failure to remove product");
-                return false;
-            }
+            
         }
         //======================================================= End of Method ===================================================
 
@@ -96,6 +89,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                     while (reader.Read())
                     {
                         ProductModel product = new ProductModel();
+                        product.ProductID = (int)reader["Product_ID"];
                         product.ProductName = reader["Name"].ToString();
                         product.ProductDescription = reader["Description"].ToString();
                         product.ProductCategory = reader["Category"].ToString();
@@ -136,6 +130,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                     while (reader.Read())
                     {
                         ProductModel product = new ProductModel();
+                        product.ProductID = (int)reader["Product_ID"];
                         product.ProductName = reader["Name"].ToString();
                         product.ProductDescription = reader["Description"].ToString();
                         product.ProductCategory = reader["Category"].ToString();

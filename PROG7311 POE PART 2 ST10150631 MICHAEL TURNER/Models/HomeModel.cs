@@ -1,13 +1,13 @@
 ﻿using Microsoft.Data.SqlClient;
+using PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Properties;
 
 namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
 {
     public class HomeModel
     {
-        private readonly string connectionString = "Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_DB;Persist Security Info=False;User ID=st10150631;Password=Br1s1ngr1047;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private string connectionString = "Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_DB;Persist Security Info=False;User ID=st10150631;Password=Br1s1ngr1047;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public HomeModel()
         {
-
         }
         /// <summary>
         /// 
