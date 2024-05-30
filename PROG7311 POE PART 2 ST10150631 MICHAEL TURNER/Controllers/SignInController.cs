@@ -72,6 +72,14 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         }
         //======================================================= End of Method ===================================================
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignOut()
+        {
+            CoreModel.SignedInUser = string.Empty;
+            CoreModel.UserRole = 0;
+            return RedirectToAction("Index", "Home");
+        }
         /// <summary>
         /// This method will check if the employee details are valid 
         /// </summary>

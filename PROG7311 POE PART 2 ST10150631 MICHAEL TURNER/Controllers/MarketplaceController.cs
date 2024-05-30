@@ -87,12 +87,43 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         }
 
         //======================================================= End of Method ===================================================
-        [HttpGet]
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
+        [HttpPost]
+        [ValidateAntiForgeryToken]  
         public ActionResult OnFilterType(string type)
         {
-            List<ProductModel> productList = model.FilterByType(type).Result;
-            return View("Marketplace",productList);
+            if (type != "All")
+            {
+                List<ProductModel> productList = model.FilterByType(type).Result;
+                return View("Marketplace", productList);
+            }
+            else
+            {
+                List<ProductModel> productList = model.GetAllProducts().Result;
+                return View("Marketplace", productList);
+            }
         }
+
+        //======================================================= End of Method ===================================================
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public ActionResult OnFilterDate(DateTime startDate, DateTime endDate)
+        {
+                List<ProductModel> productList = model.FilterByDate(startDate, endDate).Result;
+                return View("Marketplace", productList);
+        }
+
 
 
     }
