@@ -127,8 +127,8 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterFarmer(UserModel user)
         {
-            bool anyFieldBlank = string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Name) || string.IsNullOrWhiteSpace(user.Email) ;
-            if (signIn.GetUserDetails(user.Username) != null || anyFieldBlank == false)
+            bool anyFieldBlank = string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Name) || string.IsNullOrWhiteSpace(user.Email) || string.IsNullOrWhiteSpace(user.PasswordHash);
+            if (signIn.GetUserDetails(user.Username) == null || anyFieldBlank == false)
             {
                 await signIn.AddFarmer(user.Username, user.PasswordHash, user.Name, user.Email);
                 return RedirectToAction("Index", "Home");
@@ -151,7 +151,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         public async Task<IActionResult> LoginUser(UserModel user)
         {
             bool isFieldBlank = string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrEmpty(user.PasswordHash);
-            if (signIn.Login(user.Username, user.PasswordHash) != null && isFieldBlank == false)
+            if (signIn.GetUserDetails(user.Username).Result !=null && isFieldBlank == false)
             {
                 var userLogin = signIn.Login(user.Username, user.PasswordHash);
                 return RedirectToAction("Index", "Home");

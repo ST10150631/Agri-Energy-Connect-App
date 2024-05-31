@@ -81,7 +81,8 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
         {
             string courseAuthor = CoreModel.SignedInUser;
             string query = "INSERT INTO [dbo].[COURSES] (Name, Topic, Content, AuthorName, CourseImage, CourseVideo) VALUES (@CourseName, @CourseTopic, @CourseContent, @CourseAuthor, @CourseImage, @CourseVideo)";
-            
+            try
+            {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -90,7 +91,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                     command.Parameters.AddWithValue("@CourseTopic", courseTopic);
                     command.Parameters.AddWithValue("@CourseContent", courseContent);
                     command.Parameters.AddWithValue("@CourseAuthor", courseAuthor);
-                    if(courseImage == null)
+                    if (courseImage == null)
                     {
                         command.Parameters.AddWithValue("@CourseImage", DBNull.Value);
                     }
@@ -108,8 +109,14 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                     }
                     await command.ExecuteNonQueryAsync();
                 }
+
             
-        }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failure To Add course");
+            }
+}
         //======================================================= End of Method ===================================================
     }
 }

@@ -41,7 +41,8 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         {
             if(image == null || video == null)
             {
-                return View(course);
+                TempData["UploadError"] = "Please upload an image and a video";
+                return RedirectToAction("AddEducationResource",course);
             }
             else
             {

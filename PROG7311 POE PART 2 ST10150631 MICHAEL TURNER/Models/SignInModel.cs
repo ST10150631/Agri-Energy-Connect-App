@@ -61,35 +61,43 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
             UserModel user = null;
 
             string query = "SELECT * FROM Users WHERE Username = @Username";
-
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            try
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Username", username);
-
-                connection.Open();
-
-                // Use ExecuteScalarAsync to efficiently retrieve a single row
-                using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
-                    if (await reader.ReadAsync())
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Username", username);
+
+                    connection.Open();
+
+                    // Use ExecuteScalarAsync to efficiently retrieve a single row
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
                     {
-                        // Map the data from the database to a User object
-                        user = new UserModel
+                        if (await reader.ReadAsync())
                         {
-                            Username = reader["Username"].ToString(),
-                            Name = reader["Name"].ToString(),
-                            Email = reader["Email"].ToString(),
-                            Role = (int)reader["Role_ID"],
-                            PasswordHash = reader["PasswordHash"].ToString()
-                            // Map other properties as needed
-                        };
-                        return user;
+                            // Map the data from the database to a User object
+                            user = new UserModel
+                            {
+                                Username = reader["Username"].ToString(),
+                                Name = reader["Name"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                Role = (int)reader["Role_ID"],
+                                PasswordHash = reader["PasswordHash"].ToString()
+                                // Map other properties as needed
+                            };
+                        }
                     }
                 }
+                return user;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failure to get user details");
+                return null;
             }
 
-            return null;
+
+            
         }
         //======================================================= End of Method ===================================================
 
@@ -189,21 +197,20 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
             try
             {
                 var user = GetUserDetails(username).Result;
+                if (user.Username == username && VerifyPassword(password, user.PasswordHash))
+                {
+                    CoreModel.SignedInUser = username;
+                    CoreModel.UserRole = user.Role;
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Failure to login");
-                return null;
-            }
-            
-            if (user.Username == username && VerifyPassword(password,user.PasswordHash))
-            {
-                CoreModel.SignedInUser = username;
-                CoreModel.UserRole = user.Role;
-                return user;
-            }
-            else
-            {
                 return null;
             }
 
