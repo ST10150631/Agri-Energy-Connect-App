@@ -50,18 +50,23 @@
             <!-- Display Posts -->
                     @foreach (var item in Model)
                     {
+                @if (item.PostImage != null && item.PostImage.Length > 0)
+                {
                     <div class="card text-black border-primary mb-3" style="max-width: 80rem;">
                         <div class="card-header">
-                            <h3>posted by: @item.Creator</h3>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <h3>Posted by: @item.Creator</h3>
+                            <button type="button" class="btn btn-info">+ Follow</button>
+                            </div>
                             <p class="card-text">Date Posted: @item.PostDate.ToString()</p>
-                            @if(item.PostImage != null)
-                            {
                                 <img class="card-img-top" src="data:image;base64,@(Convert.ToBase64String(@item.PostImage))" style="height: 600px; object-fit:cover;" />
-                            }
                             <div class="card-body">
                                 <p class="card-text">Topic: @item.Topic</p>
                                 <p class="card-text">@item.Content</p>
+                                <h5> Likes: </h5>
                                 <div class="d-flex justify-content-between align-items-center">
+                                    <!-- like button here-->
+                                    <button type="button" class="btn btn-primary like-btn" data-post-id="@item.ID">Like</button>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-success">Comment</button>
                                     </div>
@@ -69,7 +74,33 @@
                             </div>
                         </div>
                     </div>
-                    }
+                }
+                else
+                {
+                    <div class="card text-black border-primary mb-3" style="max-width: 80rem;">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3>Posted by: @item.Creator</h3>
+                                <button type="button" class="btn btn-info">+ Follow</button>
+                            </div>
+                            <p class="card-text">Date Posted: @item.PostDate.ToString()</p>
+                            <div class="card-body">
+                                <p class="card-text">Topic: @item.Topic</p>
+                                <p class="card-text">@item.Content</p>
+                                <h5> Likes: </h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <!-- like button here-->
+                                    <button type="button" class="btn btn-primary like-btn" data-post-id="@item.ID">Like</button>
+                                    <!-- Comment Button that will be available when development is finished -->
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-success">Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
         </div>
     </div>
     <div>

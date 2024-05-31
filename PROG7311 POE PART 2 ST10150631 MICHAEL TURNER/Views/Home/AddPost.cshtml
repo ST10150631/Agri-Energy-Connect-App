@@ -45,6 +45,13 @@
                 @Html.Label("Post Content:")
                 @Html.TextBoxFor(model => model.Content, new { @class = "form-control", id = "InputModuleName" })
             </div>
+            @if (TempData["RequiredFieldsMissing"] != null)
+            {
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Oh snap!</strong> @TempData["RequiredFieldsMissing"]
+                </div>
+            }
             
             <button type="submit" class="btn btn-success">+ Create post</button>
         </div>

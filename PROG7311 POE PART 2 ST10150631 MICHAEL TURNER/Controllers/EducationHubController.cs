@@ -28,7 +28,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
 
 
         /// <summary>
-        /// 
+        /// Validateas the user input and uploads the image and video to the database with the course details
         /// </summary>
         /// <param name="course"></param>
         /// <param name="image"></param>
@@ -41,11 +41,17 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         {
             if(image == null || video == null)
             {
-                TempData["UploadError"] = "Please upload an image and a video";
+                TempData["UploadError"] = "Eductaional Resources require both an Image and a video. Please upload an image and a video";
                 return RedirectToAction("AddEducationResource",course);
+            }
+            else if(course.Name == null || course.Topic == null || course.Content == null)
+            {
+                TempData["UploadError"] = "Please fill in all fields";
+                return RedirectToAction("AddEducationResource", course);
             }
             else
             {
+                //Converts both the image and video to byte arrays in order to be stored in the database
                 using (var imageMemoryStream = new MemoryStream())
                 using (var videoMemoryStream = new MemoryStream())
                 {
