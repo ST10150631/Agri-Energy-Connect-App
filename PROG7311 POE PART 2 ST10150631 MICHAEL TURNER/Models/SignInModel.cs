@@ -186,14 +186,27 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
         /// ----------------------------------------------------- Start of Method ------------------------------------------------
         public UserModel Login(string username, string password)
         {
-            var user = GetUserDetails(username).Result;
+            try
+            {
+                var user = GetUserDetails(username).Result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failure to login");
+                return null;
+            }
+            
             if (user.Username == username && VerifyPassword(password,user.PasswordHash))
             {
                 CoreModel.SignedInUser = username;
                 CoreModel.UserRole = user.Role;
                 return user;
             }
-            return null;
+            else
+            {
+                return null;
+            }
+
         }
         //======================================================= End of Method ===================================================
 

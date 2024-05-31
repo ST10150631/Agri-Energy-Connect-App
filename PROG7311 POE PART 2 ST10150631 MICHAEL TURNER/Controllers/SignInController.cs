@@ -158,10 +158,14 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
             }
             else
             {
-                TempData["ErrorLogin"] = "Sorry, the username or password is incorrect. Try again.";
+                TempData["ErrorLogin"] = "Login Failed Ensure that all fields are correct";
                 return View("Login");
             }
 
         }
+        //======================================================= End of Method ===================================================
+
+
     }
 }
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END OF FILE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

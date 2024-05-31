@@ -39,7 +39,14 @@
                     @Html.Label("Password")
                     @Html.PasswordFor(model => model.PasswordHash, new { @class = "form-control", id = "InputPassword", type = "password" })
 
+            </div>
+            @if (TempData["ErrorLogin"] != null)
+            {
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>Oh snap!</strong> @TempData["ErrorLogin"]
                 </div>
+            }
                 <button type="submit" class="btn btn-success">Sign In</button>
             </div>
 

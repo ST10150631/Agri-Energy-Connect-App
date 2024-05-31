@@ -1,5 +1,54 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models.MessageModel>
+
+<h1 style="color:aliceblue">Collaborations</h1>
+<div class="row">
+    <!-- Side collabs tab-->
+    <div class="col-md-4">
+        <form action="@Url.Action("AddCollaboration")" method="post">
+                <div class="card bg-primary text-white" style="min-height:75vh">
+                    <div class="card-header">Collaborations: </div>
+                    <button class="btn btn-lg btn-info" type="button" fdprocessedid="k43gi">Global Chat</button>
+                    <p></p>
+                    <button class="btn btn-lg btn-success" type="submit" fdprocessedid="k43gi">+ Add Collaboration</button>
+                    <p></p>
+                @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>Oh snap!</strong> @TempData["Message"]
+                    </div>
+                }
+                </div>
+        </form>
+    </div>
+    <div class="col">
+        <div class="card text-white" style="min-height:75vh;background:#1b1f1e">
+                <div class="row">
+                    @if (Model != null)
+                    {
+                    <div class="d-flex flex-column" style="height: 70vh;overflow-y:scroll">
+                        @foreach (var item in Model)
+                        {
+                            <p style="color:aliceblue">@item.Sender: @item.Message</p>
+                            <p style="color:dimgray">Date Sent: @item.Time</p>
+                        }
+                        </div>
+                    }
+                    else
+                    {
+                        <h3 style="color:aliceblue"> Messages will appear here.....</h3>
+                    }
+                </div>
+            @using (Html.BeginForm("AddMessage", "Collaboration", FormMethod.Post))
+            {
+                <!-- Apply margin-top auto to push the input group to the bottom -->
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Message:" name="MessageContent" aria-label="MessageBox" aria-describedby="button-addon2" fdprocessedid="rzipdi">
+                    <button class="btn btn-info" type="submit" id="BtnSend" fdprocessedid="noj6a4">Send</button>
+                </div>
+            }
+            
+            </div>
+        </div>
+    </div>
+</div>
