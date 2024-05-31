@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Hosting;
 
 namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
 {
@@ -37,8 +38,9 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
                         message.Time = reader.GetDateTime(2);
                         message.Sender = reader["SENDER"].ToString();
                         messages.Add(message);
-                    }
                 }
+                }
+            messages = messages.OrderByDescending(p => p.Time).ToList();
             return messages;
         }
         //======================================================= End of Method ===================================================
