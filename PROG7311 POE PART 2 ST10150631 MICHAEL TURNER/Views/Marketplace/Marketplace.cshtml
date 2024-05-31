@@ -1,4 +1,9 @@
 ﻿@model IEnumerable<PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models.ProductModel>
+@{
+    PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers.MarketplaceController control = new PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers.MarketplaceController();
+    List<PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models.ProductModel> farmerList = control.GetAllSuppliers();
+}
+
     <style>
         .btn.btn-success {
             width: 100%; /* Make the button fill the container width */
@@ -29,22 +34,41 @@
         <div class="row">
             <!-- Filter Mechanism for product Type -->
         <div class="col">
-            @using (Html.BeginForm("OnFilterType", "Marketplace", FormMethod.Post))
+            @using (Html.BeginForm("OnFilterSupplier", "Marketplace", FormMethod.Post))
             {
-                <a class="form-select" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter Product Types</a>
+                <a class="form-select" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter By Supplier</a>
                 <div class="dropdown-menu" style="">
-                    <h6 class="dropdown-header">Filter</h6>
-                    <select class="dropdown-item" id="type" name="type" fdprocessedid="us1jy">
-                        <option value="All">All</option>
-                        <option value="Wind Energy">Wind Energy</option>
-                        <option value="Solar Energy">Solar Energy</option>
-                        <option value="Hydropower">Hydropower</option>
-                        <option value="Biofuel">Biofuel</option>
-                        <option value="Other">Other</option>
-                    </select>
+                    <h6 class="dropdown-header">Filter By Supplier</h6>
+                        <select class="dropdown-item" id="supplier" name="supplier" fdprocessedid="us1jy">
+                            @if (Model != null && farmerList.Count > 0)
+                            {
+                                @foreach(var product in farmerList)
+                                {
+                                    <option value="@product.SupplierName">@product.SupplierName"</option>
+                                }
+                            }
+                        </select>
                     <button type="submit" class="btn btn-primary">Apply Filter</button>
                 </div>
             }
+            </div>
+            <div class="col">
+                @using (Html.BeginForm("OnFilterType", "Marketplace", FormMethod.Post))
+                {
+                    <a class="form-select" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Filter Product Types</a>
+                    <div class="dropdown-menu" style="">
+                        <h6 class="dropdown-header">Filter</h6>
+                        <select class="dropdown-item" id="type" name="type" fdprocessedid="us1jy">
+                            <option value="All">All</option>
+                            <option value="Wind Energy">Wind Energy</option>
+                            <option value="Solar Energy">Solar Energy</option>
+                            <option value="Hydropower">Hydropower</option>
+                            <option value="Biofuel">Biofuel</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Apply Filter</button>
+                    </div>
+                }
             </div>
             <!-- Filter Mechanism for product Production Date -->
         <div class="col">
@@ -70,12 +94,12 @@
         <div class="album py-5 bg-primary" style="background-size:cover">
             <div class="container">
                 <!-- Button to Add Product-->
+            <div class="row">
             @if(CoreModel.UserRole == 2)
             {
                 <a type="button" class="btn btn-success" style="background-size:cover" asp-controller="Marketplace" asp-action="AddProduct">+ Add Product</a>
                 @foreach (var product in Model)
                 {
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
                                 <div class="card-header">
@@ -98,7 +122,6 @@
                             </div>
                         </div>
 
-                    </div>
                 }
             }
             else if(CoreModel.UserRole == 1)
@@ -106,7 +129,7 @@
               
                 @foreach(var product in Model)
                 {
-                    <div class="row">
+                    
                         <div class="col-md-4">
                             <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
                                 <div class="card-header">
@@ -128,10 +151,10 @@
                             </div>
                         </div>
 
-                    </div>
                 }
                 
             }
+            </div>
             </div>
         </div>
 

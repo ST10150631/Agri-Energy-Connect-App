@@ -195,6 +195,48 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
         //======================================================= End of Method ===================================================
 
         /// <summary>
+        /// Returns a list of products based oin supplier name fro  the database
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
+        public async Task<List<ProductModel>> FilterBySupplier(string supplier)
+        {
+            List<ProductModel> products = new List<ProductModel>();
+            string query = "SELECT * FROM [dbo].[PRODUCTS] WHERE SupplierName = @SupplierName";
+            try
+            {
+                using(SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@SupplierName", supplier);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ProductModel product = new ProductModel();
+                        product.ProductName = reader["Name"].ToString();
+                        product.ProductDescription = reader["Description"].ToString();
+                        product.ProductCategory = reader["Category"].ToString();
+                        product.ProductionDate = (DateTime)reader["ProductionDate"];
+                        product.ProductImage = (byte[])reader["ProductImage"];
+                        product.ProductPrice = (Decimal)reader["Price"];
+                        product.SupplierName = reader["SupplierName"].ToString();
+                        products.Add(product);
+                    }
+                }
+                return products;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failure to retrieve products based on supplier");
+                return null;
+            }
+        }
+        //======================================================= End of Method ===================================================
+
+
+        /// <summary>
         /// Asynchronously retrieves a list of products based on the date range
         /// </summary>
         /// <param name="startDate">The start date of the range</param>

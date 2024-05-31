@@ -90,7 +90,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         //======================================================= End of Method ===================================================
 
         /// <summary>
-        /// 
+        ///  filters products by category and returns the list of products to the view
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
@@ -114,18 +114,47 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Controllers
         //======================================================= End of Method ===================================================
 
         /// <summary>
-        /// 
+        /// filters products by date and returns the list of products to the view
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
         /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
         public ActionResult OnFilterDate(DateTime startDate, DateTime endDate)
         {
                 List<ProductModel> productList = model.FilterByDate(startDate, endDate).Result;
                 return View("Marketplace", productList);
         }
 
+        //======================================================= End of Method ===================================================
+
+        /// <summary>
+        /// Filters products by supplier name and returns the list of products to the view
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
+        public ActionResult OnFilterSupplier(string supplier)
+        {
+            List<ProductModel> productList = model.FilterBySupplier(supplier).Result;
+            return View("Marketplace", productList);
+        }
+        //======================================================= End of Method ===================================================
+
+        /// <summary>
+        /// Filters products by supplier name and returns the list of products to the view
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
+        /// ----------------------------------------------------- Start of Method ------------------------------------------------
+        public List<ProductModel> GetAllSuppliers()
+        {
+            List<ProductModel> productList = model.GetAllProducts().Result;
+            return productList;
+        }
+        //======================================================= End of Method ===================================================
 
 
     }
 }
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> END OF FILE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
