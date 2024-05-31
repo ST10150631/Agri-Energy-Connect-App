@@ -1,6 +1,7 @@
 # PROG7311 POE PART 2 ST10150631 MICHAEL TURNER
 # AGRI-ENERGY CONNECT PROTOTYPE web application 
-
+# GITHUB LINK:
+https://github.com/VCCT-OPSC7311-G1-2024/Agri-Energy-Connect-App_ST10150631V_MICHAEL_TURNER
 ![Screenshot 2024-05-31 120820](https://github.com/ST10150631/Agri-Energy-Connect-App/assets/101188233/ef9c6ecd-a753-4222-9e78-8b5469a0414e)
 
 ## INTRODUCTION 
@@ -100,13 +101,15 @@ Role: Farmer
 * ![image](https://github.com/ST10150631/Agri-Energy-Connect-App/assets/101188233/7b45b13b-9a3b-4279-a357-97322d6ec345)
 
   ### Green Energy marketplace
-  * The green energy marketplace can be accessed by clicking 'Green Marketplace' on the navbar. Here Farmers can add and delete their own products while Employees can see all products, filter by category and production dates. The purchase function for employees will be available outside of the prototype stage.
+  * The green energy marketplace can be accessed by clicking 'Green Marketplace' on the navbar. Here Farmers can add and delete their own products while Employees can see all products filter by farmer name, filter by category and production dates. The purchase function for employees will be available outside of the prototype stage.
     Farmer View: 
 ![image](https://github.com/ST10150631/Agri-Energy-Connect-App/assets/101188233/d9346753-f55e-400e-8d7b-f51341e5da58)
 
 ![image](https://github.com/ST10150631/Agri-Energy-Connect-App/assets/101188233/1fd31510-cd3d-4824-8565-a36ace40528b)
 
 Employee View: 
+![image](https://github.com/VCCT-OPSC7311-G1-2024/Agri-Energy-Connect-App_ST10150631V_MICHAEL_TURNER/assets/101188233/3c9e41c9-6727-41fa-8486-5f65f9a0da8c)
+
 
 
 ### EducationHub 
