@@ -44,6 +44,28 @@ The two roles currently are Employee and Farmer.
 Employees can view all marketplace posts and purchase them while a farmer can manage posts.
 Futhermore Employees can add farmers however farmers cannot add themselves or other farmers.
 Employees can register.
+### Test user accounts: 
+(some of the accounts were created before validation)
+
+Username: TestEmployee
+Password: Test123
+Role: Employee
+
+Username: e
+Password: e
+Role: Employee
+
+Username: FarmerGary
+Password: Test123
+Role: Farmer
+
+Username: @DonnyTheDealer
+Password: Dagga
+Role: Farmer
+
+Username: f
+Password: f
+Role: Farmer
 
 ## Application Features:
 
