@@ -7,7 +7,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Models
 {
     public class MarketplaceModel
     {
-        string ConnectionString = "Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_DB;Persist Security Info=False;User ID=st10150631;Password=Br1s1ngr1047;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        string ConnectionString = Properties.Resources.ConnectString;
         /// <summary>
         /// default constructor
         /// </summary>

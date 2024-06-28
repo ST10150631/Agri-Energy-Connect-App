@@ -121,12 +121,9 @@
     <value />
   </data>
   <data name="ConnectString" xml:space="preserve">
-    <value>"Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_DB;Persist Security Info=False;User ID=st10150631;Password=Br1s1ngr1047;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";</value>
+    <value>Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_DB;Persist Security Info=False;User ID=st10150631;Password=Br1s1ngr1047;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;</value>
   </data>
-  <data name="OfflineConnectString" xml:space="preserve">
-    <value>Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_PART2_DB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication="Active Directory Default";</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value>Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="C:\Users\micha\source\repos\PROG7311 POE PART 2 ST10150631 MICHAEL TURNER\PROG7311 POE PART 2 ST10150631 MICHAEL TURNER\PROG7311_POE_PART2_DB.mdf";Integrated Security=True</value>
+  <data name="h" xml:space="preserve">
+    <value />
   </data>
 </root>

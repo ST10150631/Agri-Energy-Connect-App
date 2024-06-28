@@ -70,7 +70,7 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_DB;Persist Security Info=False;User ID=st10150631;Password=Br1s1ngr1047;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;&quot;;.
+        ///   Looks up a localized string similar to Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_DB;Persist Security Info=False;User ID=st10150631;Password=Br1s1ngr1047;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;.
         /// </summary>
         internal static string ConnectString {
             get {
@@ -79,20 +79,11 @@ namespace PROG7311_POE_PART_2_ST10150631_MICHAEL_TURNER.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server=tcp:varsity2024server.database.windows.net,1433;Initial Catalog=PROG7311_POE_PART2_DB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=&quot;Active Directory Default&quot;;.
+        ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string OfflineConnectString {
+        internal static string h {
             get {
-                return ResourceManager.GetString("OfflineConnectString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=&quot;C:\Users\micha\source\repos\PROG7311 POE PART 2 ST10150631 MICHAEL TURNER\PROG7311 POE PART 2 ST10150631 MICHAEL TURNER\PROG7311_POE_PART2_DB.mdf&quot;;Integrated Security=True.
-        /// </summary>
-        internal static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
+                return ResourceManager.GetString("h", resourceCulture);
             }
         }
     }
